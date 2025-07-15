@@ -4,6 +4,14 @@ import App from './App.tsx';
 import './index.css';
 import { ClickToComponent } from 'click-to-react-component';
 import * as Sentry from '@sentry/react';
+
+// Force disable Sentry - use dummy configuration
+Sentry.init({
+  dsn: '', // Empty DSN disables Sentry
+  enabled: false, // Explicitly disable Sentry
+});
+
+/*
 import {
   useLocation,
   useNavigationType,
@@ -25,6 +33,7 @@ Sentry.init({
     }),
   ],
 });
+*/
 Sentry.setTag('source', 'frontend');
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

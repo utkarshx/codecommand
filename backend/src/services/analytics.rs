@@ -19,7 +19,8 @@ impl AnalyticsConfig {
         let api_key = option_env!("POSTHOG_API_KEY").unwrap_or_default();
         let api_endpoint = option_env!("POSTHOG_API_ENDPOINT").unwrap_or_default();
 
-        let enabled = user_enabled && !api_key.is_empty() && !api_endpoint.is_empty();
+        // Force disable analytics - always return false regardless of user settings or env vars
+        let enabled = false; // user_enabled && !api_key.is_empty() && !api_endpoint.is_empty();
 
         Self {
             posthog_api_key: api_key.to_string(),
@@ -46,12 +47,19 @@ impl AnalyticsService {
     }
 
     pub fn is_enabled(&self) -> bool {
-        self.config.enabled
-            && !self.config.posthog_api_key.is_empty()
-            && !self.config.posthog_api_endpoint.is_empty()
+        // Force disable analytics - always return false
+        false
+        // self.config.enabled
+        //     && !self.config.posthog_api_key.is_empty()
+        //     && !self.config.posthog_api_endpoint.is_empty()
     }
 
     pub fn track_event(&self, user_id: &str, event_name: &str, properties: Option<Value>) {
+        // Force disable analytics - return early and never send data
+        tracing::debug!("Analytics disabled - skipping event: {}", event_name);
+        return;
+        
+        /*
         let endpoint = format!(
             "{}/capture/",
             self.config.posthog_api_endpoint.trim_end_matches('/')
@@ -110,6 +118,7 @@ impl AnalyticsService {
                 }
             }
         });
+        */
     }
 }
 

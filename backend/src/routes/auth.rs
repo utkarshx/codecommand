@@ -34,8 +34,10 @@ struct DevicePollRequest {
 
 /// POST /auth/github/device/start
 async fn device_start() -> ResponseJson<ApiResponse<DeviceStartResponse>> {
+    // TODO: Replace with your own GitHub OAuth App Client ID
+    // Instructions: https://github.com/settings/developers -> OAuth Apps -> New OAuth App
     let params = [
-        ("client_id", "Ov23li9bxz3kKfPOIsGm"),
+        ("client_id", "Ov23liOdn9Ajg3Q5J5Xy"), // Replace with your Client ID
         ("scope", "user:email,repo"),
     ];
     let client = reqwest::Client::new();
@@ -103,8 +105,9 @@ async fn device_poll(
     State(app_state): State<AppState>,
     Json(payload): Json<DevicePollRequest>,
 ) -> ResponseJson<ApiResponse<String>> {
+    // TODO: Replace with your own GitHub OAuth App Client ID (same as above)
     let params = [
-        ("client_id", "Ov23li9bxz3kKfPOIsGm"),
+        ("client_id", "Ov23liOdn9Ajg3Q5J5Xy"), // Replace with your Client ID
         ("device_code", payload.device_code.as_str()),
         ("grant_type", "urn:ietf:params:oauth:grant-type:device_code"),
     ];

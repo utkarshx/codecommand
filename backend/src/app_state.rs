@@ -182,6 +182,7 @@ impl AppState {
         event_name: &str,
         properties: Option<serde_json::Value>,
     ) {
+        // Note: Analytics are force-disabled in analytics.rs - this will always skip sending data
         let analytics = self.analytics.read().await;
         if analytics.is_enabled() {
             analytics.track_event(&self.user_id, event_name, properties);

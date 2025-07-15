@@ -11,11 +11,21 @@ fn main() -> anyhow::Result<()> {
     } else {
         "production"
     };
+    
+    // Force disable Sentry - use dummy configuration
+    let _guard = sentry::init(sentry::ClientOptions {
+        dsn: None, // Disable Sentry by setting DSN to None
+        ..Default::default()
+    });
+    
+    /*
     let _guard = sentry::init(("https://1065a1d276a581316999a07d5dffee26@o4509603705192449.ingest.de.sentry.io/4509605576441937", sentry::ClientOptions {
         release: sentry::release_name!(),
         environment: Some(environment.into()),
         ..Default::default()
     }));
+    */
+    
     sentry::configure_scope(|scope| {
         scope.set_tag("source", "mcp");
     });
