@@ -15,7 +15,7 @@ pub struct AnalyticsConfig {
 }
 
 impl AnalyticsConfig {
-    pub fn new(user_enabled: bool) -> Self {
+    pub fn new(_user_enabled: bool) -> Self {
         let api_key = option_env!("POSTHOG_API_KEY").unwrap_or_default();
         let api_endpoint = option_env!("POSTHOG_API_ENDPOINT").unwrap_or_default();
 
@@ -54,7 +54,7 @@ impl AnalyticsService {
         //     && !self.config.posthog_api_endpoint.is_empty()
     }
 
-    pub fn track_event(&self, user_id: &str, event_name: &str, properties: Option<Value>) {
+    pub fn track_event(&self, _user_id: &str, event_name: &str, _properties: Option<Value>) {
         // Force disable analytics - return early and never send data
         tracing::debug!("Analytics disabled - skipping event: {}", event_name);
         return;

@@ -120,7 +120,7 @@ async fn serve_sound_file(
 }
 
 fn main() -> anyhow::Result<()> {
-    let environment = if cfg!(debug_assertions) {
+    let _environment = if cfg!(debug_assertions) {
         "dev"
     } else {
         "production"
