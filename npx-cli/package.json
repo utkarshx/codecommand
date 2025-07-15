@@ -1,0 +1,17 @@
+{
+  "name": "codecommand",
+  "private": false,
+  "version": "0.0.47",
+  "main": "index.js",
+  "bin": {
+    "codecommand": "bin/cli.js"
+  },
+  "keywords": [],
+  "author": "bloop",
+  "license": "",
+  "description": "NPX wrapper around codecommand and codecommand-mcp",
+  "files": [
+    "dist",
+    "bin"
+  ]
+}
